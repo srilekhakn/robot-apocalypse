@@ -2,7 +2,7 @@ package com.survive.robotapocalypse.service;
 
 import com.survive.robotapocalypse.dao.RobotRepository;
 import com.survive.robotapocalypse.model.Robot;
-import com.survive.robotapocalypse.service.exception.NoRecordFound;
+import com.survive.robotapocalypse.service.exception.NotFoundException;
 import com.survive.robotapocalypse.service.exception.RecordAlreadyExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -39,13 +39,13 @@ public class RobotService {
      * Gets the list of Robots
      *
      * @return the list of Robots.
-     * @throws NoRecordFound if there is no records of Robots in the DB
+     * @throws NotFoundException if there is no records of Robots in the DB
      */
-    public List<Robot> fetch(String sortBy) throws NoRecordFound {
+    public List<Robot> fetch(String sortBy) throws NotFoundException {
         List<Robot> robots = robotRepository.findAll(Sort.by(sortBy));
 
         if (robots.isEmpty()) {
-            throw new NoRecordFound("No Record Found");
+            throw new NotFoundException("No Record Found");
         }
         return robots;
     }

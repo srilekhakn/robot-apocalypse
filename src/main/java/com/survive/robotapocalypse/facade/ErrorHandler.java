@@ -3,6 +3,7 @@ package com.survive.robotapocalypse.facade;
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
 import com.survive.robotapocalypse.facade.dto.ErrorResponseDTO;
 import com.survive.robotapocalypse.service.exception.NotFoundException;
+import com.survive.robotapocalypse.service.exception.RecordAlreadyExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -50,4 +51,14 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
         ErrorResponseDTO errorResponse = new ErrorResponseDTO(ex.getMessage(), "Security Exception occurred!");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
     }
+
+    @ResponseBody
+    @ResponseStatus(HttpStatus.ALREADY_REPORTED)
+    @ExceptionHandler(RecordAlreadyExistException.class)
+    public final ResponseEntity<ErrorResponseDTO> handleRecordExists(final RecordAlreadyExistException ex,
+                                                                 final WebRequest request) {
+        ErrorResponseDTO errorResponse = new ErrorResponseDTO(ex.getMessage(), "Record already exist Exception occurred!");
+        return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(errorResponse);
+    }
+
 }

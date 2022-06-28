@@ -95,6 +95,9 @@ public class SurvivorService {
      */
     public MarkInfected markInfected(final MarkInfected markInfected)
             throws NotFoundException {
+        if (markInfected.getSurvivorId().equals(markInfected.getInfectedSurvivorId())){
+            throw new IllegalArgumentException("both Id's can't be same");
+        }
         boolean survivorStatus = survivorRepository.existsById(markInfected.getSurvivorId());
         boolean infectedStatus = survivorRepository.existsById(markInfected.getInfectedSurvivorId());
         if (!survivorStatus) {
@@ -130,7 +133,11 @@ public class SurvivorService {
      * @throws NotFoundException if no records found.
      */
     public List<Survivor> getInfectedSurvivors() {
-        return survivorRepository.findByInfected(true);
+        List<Survivor> survivorList = survivorRepository.findByInfected(true);
+        if (survivorList.isEmpty()) {
+            throw new NotFoundException("No Record found!");
+        }
+        return survivorList;
     }
 
     /**
@@ -141,7 +148,11 @@ public class SurvivorService {
      * @throws NotFoundException if no records found.
      */
     public List<Survivor> getNonInfectedSurvivors() {
-        return survivorRepository.findByInfected(false);
+        List<Survivor> survivorList = survivorRepository.findByInfected(false);
+        if (survivorList.isEmpty()) {
+            throw new NotFoundException("No Record found!");
+        }
+        return survivorList;
     }
 
     /**
@@ -154,6 +165,9 @@ public class SurvivorService {
     public double getInfectedSurvivorsPercentage() {
         long infectedCount = survivorRepository.countByInfected(true);
         long totalCount = survivorRepository.count();
+        if (totalCount==0) {
+            throw new NotFoundException("No Record found!");
+        }
         return ((double) infectedCount / totalCount) * 100;
     }
 
@@ -167,6 +181,9 @@ public class SurvivorService {
     public double getNonInfectedSurvivorsPercentage() {
         long nonInfectedCount = survivorRepository.countByInfected(false);
         long totalCount = survivorRepository.count();
+        if (totalCount==0) {
+            throw new NotFoundException("No Record found!");
+        }
         return ((double) nonInfectedCount / totalCount) * 100;
     }
 }

@@ -27,4 +27,8 @@ http://localhost:8080/
 Docker commands to build and run the Project
 --------------------------------------------------
 docker build -t="robot-apocalypse" .
+
 docker run -p 8080:8080 -it --rm robot-apocalypse 
+
+http://localhost:8080/
+

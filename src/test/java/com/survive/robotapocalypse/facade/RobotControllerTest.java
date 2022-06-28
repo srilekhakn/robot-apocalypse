@@ -26,6 +26,9 @@ public class RobotControllerTest {
     @MockBean
     RobotRepository robotRepository;
 
+    @MockBean
+    ResourcesRepository resourcesRepository;
+
     @BeforeAll
     public static void init() {
         //      Initialize RobotDTO object

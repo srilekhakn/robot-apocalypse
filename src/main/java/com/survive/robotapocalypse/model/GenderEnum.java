@@ -9,11 +9,11 @@ public enum GenderEnum {
     OTHERS("O");
     private final String gender;
 
-    GenderEnum(final String gender){
+    GenderEnum(final String gender) {
         this.gender = gender;
     }
 
-    public String getGender(){
+    public String getGender() {
         return gender;
     }
 }

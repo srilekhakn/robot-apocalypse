@@ -18,16 +18,15 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @Tag(name = "Robot", description = "The Robot API.")
 @Controller
 @RequestMapping("/robot")
 public class RobotController {
 
+    Logger logger = LoggerFactory.getLogger(RobotController.class);
     @Autowired
     private RobotService robotService;
-    Logger logger = LoggerFactory.getLogger(RobotController.class);
 
     @Operation(summary = "Insert a new robot", description = "Persist a new robot and generate its id.")
     @ApiResponses(value = {@ApiResponse(responseCode = "201", description = "Robot created")})
@@ -42,9 +41,9 @@ public class RobotController {
     @Operation(summary = "Get List of robots", description = "Get List of Robots")
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Robot List")})
     @GetMapping(value = "/", produces = {"application/json"})
-    public ResponseEntity<List<Robot>> fetch(@RequestParam("sortBy") Optional<RobotEnum> sortBy) {
+    public ResponseEntity<List<Robot>> fetch(@RequestParam("sortBy") RobotEnum sortBy) {
 
-        List<Robot> robotList = robotService.fetch(sortBy.isEmpty()?null:sortBy.get().getRobotVariable());
+        List<Robot> robotList = robotService.fetch(sortBy.getRobotVariable());
         return ResponseEntity.status(HttpStatus.OK)
                 .body(robotList);
     }

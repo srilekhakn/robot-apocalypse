@@ -26,10 +26,9 @@ import java.util.List;
 @RequestMapping("/survivor")
 public class SurvivorController {
 
+    Logger logger = LoggerFactory.getLogger(SurvivorController.class);
     @Autowired
     private SurvivorService survivorService;
-
-    Logger logger = LoggerFactory.getLogger(SurvivorController.class);
 
     @Operation(summary = "Insert a new survivor", description = "Persist a new survivor and generate its id.")
     @ApiResponses(value = {@ApiResponse(responseCode = "201", description = "Survivor created")})
@@ -56,7 +55,7 @@ public class SurvivorController {
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Successfully marked as infected")})
     @PostMapping(path = "/mark-infected", produces = {"application/json"}, consumes = {"application/json"})
     public ResponseEntity<MarkInfectedDTO> markInfected(
-           @Parameter(description = "", required = true) @Valid @RequestBody final MarkInfectedDTO dto) {
+            @Parameter(description = "", required = true) @Valid @RequestBody final MarkInfectedDTO dto) {
         MarkInfected markInfected = MarkInfectedDTO.toMarkInfected(dto);
         MarkInfected mi = survivorService.markInfected(markInfected);
         return ResponseEntity.ok(MarkInfectedDTO.fromMarkInfected(mi));

@@ -15,39 +15,39 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class ErrorHandler extends ResponseEntityExceptionHandler {
 
-  @ResponseBody
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
-  @ExceptionHandler(IllegalArgumentException.class)
-  public final ResponseEntity<ErrorResponseDTO> handleIllegalArgument(final IllegalArgumentException ex,
-                                                                      final WebRequest request) {
-    ErrorResponseDTO errorResponse = new ErrorResponseDTO(ex.getMessage());
-    return ResponseEntity.badRequest().body(errorResponse);
-  }
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public final ResponseEntity<ErrorResponseDTO> handleIllegalArgument(final IllegalArgumentException ex,
+                                                                        final WebRequest request) {
+        ErrorResponseDTO errorResponse = new ErrorResponseDTO(ex.getMessage());
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
 
-  @ResponseBody
-  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-  @ExceptionHandler(InvalidDefinitionException.class)
-  public final ResponseEntity<ErrorResponseDTO> handleInvalidDefinition(final InvalidDefinitionException ex,
-      final WebRequest request) {
-    ErrorResponseDTO errorResponse = new ErrorResponseDTO(ex.getMessage());
-    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-  }
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(InvalidDefinitionException.class)
+    public final ResponseEntity<ErrorResponseDTO> handleInvalidDefinition(final InvalidDefinitionException ex,
+                                                                          final WebRequest request) {
+        ErrorResponseDTO errorResponse = new ErrorResponseDTO(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+    }
 
-  @ResponseBody
-  @ResponseStatus(HttpStatus.NOT_FOUND)
-  @ExceptionHandler(NotFoundException.class)
-  public final ResponseEntity<ErrorResponseDTO> handleNotFound(final NotFoundException ex,
-      final WebRequest request) {
-    ErrorResponseDTO errorResponse = new ErrorResponseDTO(ex.getMessage());
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
-  }
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public final ResponseEntity<ErrorResponseDTO> handleNotFound(final NotFoundException ex,
+                                                                 final WebRequest request) {
+        ErrorResponseDTO errorResponse = new ErrorResponseDTO(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
 
-  @ResponseBody
-  @ResponseStatus(HttpStatus.UNAUTHORIZED)
-  @ExceptionHandler(SecurityException.class)
-  public final ResponseEntity<ErrorResponseDTO> handleSecurity(final SecurityException ex,
-      final WebRequest request) {
-    ErrorResponseDTO errorResponse = new ErrorResponseDTO(ex.getMessage(),"Security Exception occurred!");
-      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
-  }
+    @ResponseBody
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(SecurityException.class)
+    public final ResponseEntity<ErrorResponseDTO> handleSecurity(final SecurityException ex,
+                                                                 final WebRequest request) {
+        ErrorResponseDTO errorResponse = new ErrorResponseDTO(ex.getMessage(), "Security Exception occurred!");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+    }
 }

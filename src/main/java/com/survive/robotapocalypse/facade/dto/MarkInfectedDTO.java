@@ -8,6 +8,20 @@ public class MarkInfectedDTO {
 
     private String infectedSurvivorId;
 
+    public static MarkInfected toMarkInfected(final MarkInfectedDTO dto) {
+        final MarkInfected markInfected = new MarkInfected();
+        markInfected.setInfectedSurvivorId(dto.getInfectedSurvivorId());
+        markInfected.setSurvivorId(dto.getSurvivorId());
+        return markInfected;
+    }
+
+    public static MarkInfectedDTO fromMarkInfected(final MarkInfected markInfected) {
+        final MarkInfectedDTO mi = new MarkInfectedDTO();
+        mi.setSurvivorId(markInfected.getSurvivorId());
+        mi.setInfectedSurvivorId(markInfected.getInfectedSurvivorId());
+        return mi;
+    }
+
     public String getSurvivorId() {
         return survivorId;
     }
@@ -22,19 +36,5 @@ public class MarkInfectedDTO {
 
     public void setInfectedSurvivorId(String infectedSurvivorId) {
         this.infectedSurvivorId = infectedSurvivorId;
-    }
-
-    public static MarkInfected toMarkInfected(final MarkInfectedDTO dto) {
-        final MarkInfected markInfected = new MarkInfected();
-        markInfected.setInfectedSurvivorId(dto.getInfectedSurvivorId());
-        markInfected.setSurvivorId(dto.getSurvivorId());
-        return markInfected;
-    }
-
-    public static MarkInfectedDTO fromMarkInfected(final MarkInfected markInfected) {
-        final MarkInfectedDTO mi = new MarkInfectedDTO();
-        mi.setSurvivorId(markInfected.getSurvivorId());
-        mi.setInfectedSurvivorId(markInfected.getInfectedSurvivorId());
-        return mi;
     }
 }

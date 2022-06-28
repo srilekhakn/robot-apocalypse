@@ -27,7 +27,7 @@ public class RobotService {
      */
     public Robot insert(final Robot robot) throws RecordAlreadyExistException {
         boolean robotExist = robotRepository.existsBySerialNumber(robot.getSerialNumber());
-        if (robotExist){
+        if (robotExist) {
             throw new RecordAlreadyExistException("Robot Already Exist with SerialNumber");
         }
         return robotRepository.save(robot);
@@ -44,7 +44,7 @@ public class RobotService {
     public List<Robot> fetch(String sortBy) throws NoRecordFound {
         List<Robot> robots = robotRepository.findAll(Sort.by(sortBy));
 
-        if (robots.isEmpty()){
+        if (robots.isEmpty()) {
             throw new NoRecordFound("No Record Found");
         }
         return robots;

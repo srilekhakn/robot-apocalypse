@@ -14,19 +14,15 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest(SurvivorController.class)
 public class SurvivorControllerTest {
 
+    static SurvivorDTO survivorDTO;
     @Autowired
     MockMvc mockMvc;
-
     @Autowired
     ObjectMapper mapper;
-
     @MockBean
     SurvivorService survivorService;
-
     @MockBean
     SurvivorRepository survivorRepository;
-
-    static SurvivorDTO survivorDTO;
 
     @BeforeAll
     public static void init() {

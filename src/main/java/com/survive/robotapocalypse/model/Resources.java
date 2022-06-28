@@ -17,6 +17,11 @@ public class Resources {
     public Resources() {
     }
 
+    public Resources(Long resourceId, String name) {
+        this.resourceId = resourceId;
+        this.name = name;
+    }
+
     public Long getId() {
         return resourceId;
     }
@@ -30,11 +35,6 @@ public class Resources {
     }
 
     public void setName(String name) {
-        this.name = name;
-    }
-
-    public Resources(Long resourceId, String name) {
-        this.resourceId = resourceId;
         this.name = name;
     }
 }

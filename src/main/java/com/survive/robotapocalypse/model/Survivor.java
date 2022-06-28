@@ -1,12 +1,6 @@
 package com.survive.robotapocalypse.model;
 
-import javax.persistence.Id;
-import javax.persistence.Entity;
-import javax.persistence.Column;
-import javax.persistence.ManyToMany;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -32,14 +26,14 @@ public class Survivor {
 
     @ManyToMany
     @Column(name = "resources")
-    @JoinTable(name = "Survivor_Resources",joinColumns = @JoinColumn(name = "survivorId"),
+    @JoinTable(name = "Survivor_Resources", joinColumns = @JoinColumn(name = "survivorId"),
             inverseJoinColumns = @JoinColumn(name = "resourceId"))
     private Set<Resources> resources;
 
     @Transient
     private Set<ResourcesEnum> resourcesEnums;
 
-    @Column(name = "infected" ,columnDefinition = "boolean default false")
+    @Column(name = "infected", columnDefinition = "boolean default false")
     private boolean infected;
 
     public String getSurvivorId() {

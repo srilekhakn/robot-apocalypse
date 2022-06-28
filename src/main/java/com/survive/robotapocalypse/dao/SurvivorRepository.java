@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface SurvivorRepository extends JpaRepository<Survivor,String> {
+public interface SurvivorRepository extends JpaRepository<Survivor, String> {
 
     boolean existsBySurvivorId(String survivorId);
 

@@ -1,9 +1,9 @@
 package com.survive.robotapocalypse.model;
 
-import javax.persistence.Id;
-import javax.persistence.Entity;
-import javax.persistence.IdClass;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,6 +23,7 @@ public class Robot {
 
     @Column(name = "category")
     private RobotCategory category;
+
     public String getModel() {
         return model;
     }

@@ -24,6 +24,61 @@ public class SurvivorDTO {
 
     private Set<ResourcesEnum> resources;
 
+    public static Survivor toSurvivor(final SurvivorDTO dto) {
+        final Survivor s = new Survivor();
+        s.setSurvivorId(dto.getSurvivorId());
+        s.setName(dto.getName());
+        s.setAge(dto.getAge());
+        s.setGender(dto.gender);
+
+        if (dto.getLatitude() < -90 || dto.getLatitude() > 90) {
+            throw new IllegalArgumentException("Invalid Latitude");
+        }
+
+        if (dto.getLongitude() < -180 || dto.getLongitude() > 180) {
+            throw new IllegalArgumentException("Invalid Longitude");
+        }
+        s.setLongitude(dto.getLongitude());
+        s.setLatitude(dto.getLatitude());
+        s.setInfected(false);
+        s.setResourcesEnums(dto.getResources());
+        return s;
+    }
+
+    public static SurvivorDTO fromSurvivor(final Survivor survivor) {
+        final SurvivorDTO s = new SurvivorDTO();
+        s.setSurvivorId(survivor.getSurvivorId());
+        s.setName(survivor.getName());
+        s.setAge(survivor.getAge());
+        s.setGender(survivor.getGender());
+        s.setLongitude(survivor.getLongitude());
+        s.setLatitude(survivor.getLatitude());
+        Set<Resources> resourcesSet = survivor.getResources();
+        Set<ResourcesEnum> resourcesEnumSet = new HashSet<>();
+        if (null != resourcesSet) {
+            for (Resources re : resourcesSet) {
+                switch (re.getName().toUpperCase()) {
+                    case "WATER":
+                        resourcesEnumSet.add(ResourcesEnum.WATER);
+                        break;
+                    case "FOOD":
+                        resourcesEnumSet.add(ResourcesEnum.FOOD);
+                        break;
+                    case "AMMUNITION":
+                        resourcesEnumSet.add(ResourcesEnum.AMMUNITION);
+                        break;
+                    case "MEDICATION":
+                        resourcesEnumSet.add(ResourcesEnum.MEDICATION);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        s.setResources(resourcesEnumSet);
+        return s;
+    }
+
     public String getSurvivorId() {
         return survivorId;
     }
@@ -78,60 +133,5 @@ public class SurvivorDTO {
 
     public void setResources(Set<ResourcesEnum> resources) {
         this.resources = resources;
-    }
-
-    public static Survivor toSurvivor(final SurvivorDTO dto) {
-        final Survivor s = new Survivor();
-        s.setSurvivorId(dto.getSurvivorId());
-        s.setName(dto.getName());
-        s.setAge(dto.getAge());
-        s.setGender(dto.gender);
-
-        if(dto.getLatitude() < -90 || dto.getLatitude() > 90){
-            throw new IllegalArgumentException("Invalid Latitude");
-        }
-
-        if(dto.getLongitude() < -180 || dto.getLongitude() > 180){
-            throw new IllegalArgumentException("Invalid Longitude");
-        }
-        s.setLongitude(dto.getLongitude());
-        s.setLatitude(dto.getLatitude());
-        s.setInfected(false);
-        s.setResourcesEnums(dto.getResources());
-        return s;
-    }
-
-    public static SurvivorDTO fromSurvivor(final Survivor survivor) {
-        final SurvivorDTO s = new SurvivorDTO();
-        s.setSurvivorId(survivor.getSurvivorId());
-        s.setName(survivor.getName());
-        s.setAge(survivor.getAge());
-        s.setGender(survivor.getGender());
-        s.setLongitude(survivor.getLongitude());
-        s.setLatitude(survivor.getLatitude());
-        Set<Resources> resourcesSet = survivor.getResources();
-        Set<ResourcesEnum> resourcesEnumSet = new HashSet<>();
-        if(null != resourcesSet) {
-            for (Resources re : resourcesSet) {
-                switch (re.getName().toUpperCase()) {
-                    case "WATER":
-                        resourcesEnumSet.add(ResourcesEnum.WATER);
-                        break;
-                    case "FOOD":
-                        resourcesEnumSet.add(ResourcesEnum.FOOD);
-                        break;
-                    case "AMMUNITION":
-                        resourcesEnumSet.add(ResourcesEnum.AMMUNITION);
-                        break;
-                    case "MEDICATION":
-                        resourcesEnumSet.add(ResourcesEnum.MEDICATION);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-        s.setResources(resourcesEnumSet);
-        return s;
     }
 }

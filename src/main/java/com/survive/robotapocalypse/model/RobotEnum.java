@@ -3,7 +3,6 @@ package com.survive.robotapocalypse.model;
 
 public enum RobotEnum {
 
-
     MODEL("model"),
     SERIALNUMBER("serialNumber"),
     MANUFACTUREDDATE("manufacturedDate"),
@@ -11,11 +10,11 @@ public enum RobotEnum {
 
     private final String robotVariable;
 
-    RobotEnum(final String robotVariable){
+    RobotEnum(final String robotVariable) {
         this.robotVariable = robotVariable;
     }
 
-    public String getRobotVariable(){
+    public String getRobotVariable() {
         return robotVariable;
     }
 }

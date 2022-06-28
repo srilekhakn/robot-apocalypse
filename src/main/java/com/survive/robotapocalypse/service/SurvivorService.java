@@ -22,16 +22,13 @@ import java.util.Set;
 @Service
 public class SurvivorService {
 
+    Logger logger = LoggerFactory.getLogger(SurvivorService.class);
     @Autowired
     private SurvivorRepository survivorRepository;
-
     @Autowired
     private MarkInfectedRepository markInfectedRepository;
-
     @Autowired
     private ResourcesRepository resourcesRepository;
-
-    Logger logger = LoggerFactory.getLogger(SurvivorService.class);
 
     /**
      * Persists the Survivor.
@@ -60,7 +57,6 @@ public class SurvivorService {
     /**
      * Saves the survivor for a given id. Not all fields can be updated, only Location can be updated.
      * <p>
-     *
      *
      * @param survivorId the id of the survivor to update.
      * @param survivor   the survivor object.
@@ -92,7 +88,6 @@ public class SurvivorService {
      * Mark survivor as Infected
      * <p>
      *
-     *
      * @param markInfected the markInfected object.
      * @return save the markInfected.
      * @throws IllegalArgumentException if the survivor type is different to a persisted one.
@@ -102,13 +97,13 @@ public class SurvivorService {
             throws NotFoundException {
         boolean survivorStatus = survivorRepository.existsById(markInfected.getSurvivorId());
         boolean infectedStatus = survivorRepository.existsById(markInfected.getInfectedSurvivorId());
-        if (!survivorStatus){
+        if (!survivorStatus) {
             throw new NotFoundException("SurvivorId not found!");
         }
-        if (!infectedStatus){
+        if (!infectedStatus) {
             throw new NotFoundException("Infected survivorId not found!");
         }
-        boolean statusCheck = markInfectedRepository.existsBySurvivorIdAndInfectedSurvivorId(markInfected.getSurvivorId(),markInfected.getInfectedSurvivorId());
+        boolean statusCheck = markInfectedRepository.existsBySurvivorIdAndInfectedSurvivorId(markInfected.getSurvivorId(), markInfected.getInfectedSurvivorId());
 
         if (statusCheck) {
             throw new RecordAlreadyExistException("You have already marked for this infected");
@@ -118,10 +113,10 @@ public class SurvivorService {
 
         int count = markInfectedRepository.countByInfectedSurvivorId(markInfected.getInfectedSurvivorId());
 
-        if(count >= 3){
-             Survivor updateRecord = survivorRepository.findBySurvivorId(markInfected.getInfectedSurvivorId());
-             updateRecord.setInfected(true);
-             survivorRepository.save(updateRecord);
+        if (count >= 3) {
+            Survivor updateRecord = survivorRepository.findBySurvivorId(markInfected.getInfectedSurvivorId());
+            updateRecord.setInfected(true);
+            survivorRepository.save(updateRecord);
         }
 
         return savedRecord;
@@ -132,9 +127,9 @@ public class SurvivorService {
      * <p>
      *
      * @return List of infected.
-     * @throws NotFoundException   if no records found.
+     * @throws NotFoundException if no records found.
      */
-    public List<Survivor> getInfectedSurvivors(){
+    public List<Survivor> getInfectedSurvivors() {
         return survivorRepository.findByInfected(true);
     }
 
@@ -143,9 +138,9 @@ public class SurvivorService {
      * <p>
      *
      * @return List of Non-infected.
-     * @throws NotFoundException   if no records found.
+     * @throws NotFoundException if no records found.
      */
-    public List<Survivor> getNonInfectedSurvivors(){
+    public List<Survivor> getNonInfectedSurvivors() {
         return survivorRepository.findByInfected(false);
     }
 
@@ -154,12 +149,12 @@ public class SurvivorService {
      * <p>
      *
      * @return List of infected percentage.
-     * @throws NotFoundException   if no records found.
+     * @throws NotFoundException if no records found.
      */
-    public double getInfectedSurvivorsPercentage(){
+    public double getInfectedSurvivorsPercentage() {
         long infectedCount = survivorRepository.countByInfected(true);
         long totalCount = survivorRepository.count();
-        return ((double) infectedCount/totalCount)*100;
+        return ((double) infectedCount / totalCount) * 100;
     }
 
     /**
@@ -167,11 +162,11 @@ public class SurvivorService {
      * <p>
      *
      * @return List of non-infected percentage.
-     * @throws NotFoundException   if no records found.
+     * @throws NotFoundException if no records found.
      */
-    public double getNonInfectedSurvivorsPercentage(){
+    public double getNonInfectedSurvivorsPercentage() {
         long nonInfectedCount = survivorRepository.countByInfected(false);
         long totalCount = survivorRepository.count();
-        return ((double) nonInfectedCount/totalCount)*100;
+        return ((double) nonInfectedCount / totalCount) * 100;
     }
 }

@@ -56,7 +56,7 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.ALREADY_REPORTED)
     @ExceptionHandler(RecordAlreadyExistException.class)
     public final ResponseEntity<ErrorResponseDTO> handleRecordExists(final RecordAlreadyExistException ex,
-                                                                 final WebRequest request) {
+                                                                     final WebRequest request) {
         ErrorResponseDTO errorResponse = new ErrorResponseDTO(ex.getMessage(), "Record already exist Exception occurred!");
         return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(errorResponse);
     }

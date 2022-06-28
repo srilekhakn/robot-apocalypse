@@ -79,8 +79,8 @@ public class SurvivorControllerTest {
         survivor.setLongitude(2.34);
         survivor.setName("Srilekha");
         Set<Resources> resourcesSet = new HashSet<>();
-        resourcesSet.add(new Resources(1L,"WATER"));
-        resourcesSet.add(new Resources(2L,"FOOD"));
+        resourcesSet.add(new Resources(1L, "WATER"));
+        resourcesSet.add(new Resources(2L, "FOOD"));
         survivor.setResources(resourcesSet);
 
         Mockito.when(survivorService.insert(any())).thenReturn(survivor);
@@ -107,11 +107,11 @@ public class SurvivorControllerTest {
         survivor.setLongitude(50.34);
         survivor.setName("Srilekha");
         Set<Resources> resourcesSet = new HashSet<>();
-        resourcesSet.add(new Resources(1L,"WATER"));
-        resourcesSet.add(new Resources(2L,"FOOD"));
+        resourcesSet.add(new Resources(1L, "WATER"));
+        resourcesSet.add(new Resources(2L, "FOOD"));
         survivor.setResources(resourcesSet);
 
-        Mockito.when(survivorService.update(any(),any())).thenReturn(survivor);
+        Mockito.when(survivorService.update(any(), any())).thenReturn(survivor);
 
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
                 .put("/survivor/1")
@@ -135,8 +135,8 @@ public class SurvivorControllerTest {
         survivor.setLongitude(50.34);
         survivor.setName("Srilekha");
         Set<Resources> resourcesSet = new HashSet<>();
-        resourcesSet.add(new Resources(1L,"WATER"));
-        resourcesSet.add(new Resources(2L,"FOOD"));
+        resourcesSet.add(new Resources(1L, "WATER"));
+        resourcesSet.add(new Resources(2L, "FOOD"));
         survivor.setResources(resourcesSet);
 
         Survivor survivor1 = new Survivor();
@@ -147,8 +147,8 @@ public class SurvivorControllerTest {
         survivor1.setLongitude(50.34);
         survivor1.setName("Srilekha");
         Set<Resources> resourcesSet1 = new HashSet<>();
-        resourcesSet1.add(new Resources(1L,"WATER"));
-        resourcesSet1.add(new Resources(2L,"FOOD"));
+        resourcesSet1.add(new Resources(1L, "WATER"));
+        resourcesSet1.add(new Resources(2L, "FOOD"));
         survivor1.setResources(resourcesSet1);
 
         List<Survivor> survivorList = new ArrayList<Survivor>();
@@ -164,10 +164,10 @@ public class SurvivorControllerTest {
 
         mockMvc.perform(mockRequest)
                 .andExpect(status().isOk());
-      }
+    }
 
     @Test
-    void TestGetInfectedPercent()  throws Exception {
+    void TestGetInfectedPercent() throws Exception {
         Mockito.when(survivorService.getInfectedSurvivorsPercentage()).thenReturn(80.0);
 
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders
@@ -180,7 +180,7 @@ public class SurvivorControllerTest {
     }
 
     @Test
-    void TestGetNonInfected()  throws Exception{
+    void TestGetNonInfected() throws Exception {
         Survivor survivor = new Survivor();
         survivor.setSurvivorId("1");
         survivor.setAge(25);
@@ -189,8 +189,8 @@ public class SurvivorControllerTest {
         survivor.setLongitude(50.34);
         survivor.setName("Srilekha");
         Set<Resources> resourcesSet = new HashSet<>();
-        resourcesSet.add(new Resources(1L,"WATER"));
-        resourcesSet.add(new Resources(2L,"FOOD"));
+        resourcesSet.add(new Resources(1L, "WATER"));
+        resourcesSet.add(new Resources(2L, "FOOD"));
         survivor.setResources(resourcesSet);
 
         Survivor survivor1 = new Survivor();
@@ -201,8 +201,8 @@ public class SurvivorControllerTest {
         survivor1.setLongitude(50.34);
         survivor1.setName("Srilekha");
         Set<Resources> resourcesSet1 = new HashSet<>();
-        resourcesSet1.add(new Resources(1L,"WATER"));
-        resourcesSet1.add(new Resources(2L,"FOOD"));
+        resourcesSet1.add(new Resources(1L, "WATER"));
+        resourcesSet1.add(new Resources(2L, "FOOD"));
         survivor1.setResources(resourcesSet1);
 
         List<Survivor> survivorList = new ArrayList<Survivor>();
@@ -221,7 +221,7 @@ public class SurvivorControllerTest {
     }
 
     @Test
-    void TestGetNonInfectedPercent()  throws Exception{
+    void TestGetNonInfectedPercent() throws Exception {
         Mockito.when(survivorService.getInfectedSurvivorsPercentage()).thenReturn(80.0);
 
         MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders

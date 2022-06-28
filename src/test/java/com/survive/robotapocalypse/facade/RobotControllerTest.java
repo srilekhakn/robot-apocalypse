@@ -30,21 +30,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(RobotController.class)
 public class RobotControllerTest {
 
+    static RobotDTO robotDTO;
     @Autowired
     ObjectMapper mapper;
     @MockBean
     RobotService robotService;
-
     @MockBean
     RobotRepository robotRepository;
-
     @MockBean
     ResourcesRepository resourcesRepository;
-
     @Autowired
     MockMvc mockMvc;
-
-    static RobotDTO robotDTO;
 
     @BeforeAll
     public static void init() {

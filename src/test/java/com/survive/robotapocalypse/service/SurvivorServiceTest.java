@@ -3,7 +3,6 @@ package com.survive.robotapocalypse.service;
 import com.survive.robotapocalypse.dao.MarkInfectedRepository;
 import com.survive.robotapocalypse.dao.ResourcesRepository;
 import com.survive.robotapocalypse.dao.SurvivorRepository;
-import com.survive.robotapocalypse.facade.SurvivorController;
 import com.survive.robotapocalypse.model.GenderEnum;
 import com.survive.robotapocalypse.model.Resources;
 import com.survive.robotapocalypse.model.ResourcesEnum;
@@ -11,8 +10,6 @@ import com.survive.robotapocalypse.model.Survivor;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -20,28 +17,25 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 
 @WebMvcTest(SurvivorService.class)
 class SurvivorServiceTest {
 
+    private static Survivor survivor;
     @MockBean
     SurvivorRepository survivorRepository;
-
     @MockBean
     ResourcesRepository resourcesRepository;
-
     @MockBean
     MarkInfectedRepository markInfectedRepository;
-
     @Autowired
     private SurvivorService survivorService;
 
-    private static Survivor survivor;
-
     @BeforeAll
-    public static void init(){
+    public static void init() {
         survivor = new Survivor();
         survivor.setSurvivorId("1");
         survivor.setAge(25);
@@ -54,8 +48,8 @@ class SurvivorServiceTest {
         resourcesEnumSet.add(ResourcesEnum.FOOD);
         survivor.setResourcesEnums(resourcesEnumSet);
         Set<Resources> resourcesSet = new HashSet<>();
-        resourcesSet.add(new Resources(1L,"WATER"));
-        resourcesSet.add(new Resources(2L,"FOOD"));
+        resourcesSet.add(new Resources(1L, "WATER"));
+        resourcesSet.add(new Resources(2L, "FOOD"));
         survivor.setResources(resourcesSet);
     }
 
@@ -68,7 +62,7 @@ class SurvivorServiceTest {
         Mockito.when(survivorRepository.save(any())).thenReturn(survivor);
         Mockito.when(survivorRepository.findById(any())).thenReturn(Optional.of(survivor));
 
-        Survivor survivor1 =survivorService.insert(survivor);
+        Survivor survivor1 = survivorService.insert(survivor);
 
         assertNotNull(survivor1);
     }
@@ -85,10 +79,10 @@ class SurvivorServiceTest {
         Mockito.when(survivorRepository.save(any())).thenReturn(survivor);
         Mockito.when(survivorRepository.findById(any())).thenReturn(Optional.of(survivor));
 
-        Survivor survivor1 =survivorService.update("1",survivor);
+        Survivor survivor1 = survivorService.update("1", survivor);
 
         assertNotNull(survivor1);
-        assertEquals(12.0,survivor1.getLongitude());
+        assertEquals(12.0, survivor1.getLongitude());
     }
 
     @Test
@@ -99,7 +93,7 @@ class SurvivorServiceTest {
         survivorList.add(survivor);
         Mockito.when(survivorRepository.findByInfected(true)).thenReturn(survivorList);
         List<Survivor> survivorList1 = survivorService.getInfectedSurvivors();
-        assertEquals(1,survivorList1.size());
+        assertEquals(1, survivorList1.size());
     }
 
     @Test
@@ -110,7 +104,7 @@ class SurvivorServiceTest {
         survivorList.add(survivor);
         Mockito.when(survivorRepository.findByInfected(false)).thenReturn(survivorList);
         List<Survivor> survivorList1 = survivorService.getNonInfectedSurvivors();
-        assertEquals(1,survivorList1.size());
+        assertEquals(1, survivorList1.size());
     }
 
     @Test
@@ -122,7 +116,7 @@ class SurvivorServiceTest {
 
         //    Test Survivor getInfectedPercent in service class
         double percent = survivorService.getInfectedSurvivorsPercentage();
-        assertEquals(30.0,percent);
+        assertEquals(30.0, percent);
     }
 
     @Test
@@ -134,7 +128,7 @@ class SurvivorServiceTest {
 
         //    Test Survivor getNonInfectedPercent in service class
         double percent = survivorService.getNonInfectedSurvivorsPercentage();
-        assertEquals(30.0,percent);
+        assertEquals(30.0, percent);
     }
 
 }

@@ -95,7 +95,7 @@ public class SurvivorService {
      */
     public MarkInfected markInfected(final MarkInfected markInfected)
             throws NotFoundException {
-        if (markInfected.getSurvivorId().equals(markInfected.getInfectedSurvivorId())){
+        if (markInfected.getSurvivorId().equals(markInfected.getInfectedSurvivorId())) {
             throw new IllegalArgumentException("both Id's can't be same");
         }
         boolean survivorStatus = survivorRepository.existsById(markInfected.getSurvivorId());
@@ -165,7 +165,7 @@ public class SurvivorService {
     public double getInfectedSurvivorsPercentage() {
         long infectedCount = survivorRepository.countByInfected(true);
         long totalCount = survivorRepository.count();
-        if (totalCount==0) {
+        if (totalCount == 0) {
             throw new NotFoundException("No Record found!");
         }
         return ((double) infectedCount / totalCount) * 100;
@@ -181,7 +181,7 @@ public class SurvivorService {
     public double getNonInfectedSurvivorsPercentage() {
         long nonInfectedCount = survivorRepository.countByInfected(false);
         long totalCount = survivorRepository.count();
-        if (totalCount==0) {
+        if (totalCount == 0) {
             throw new NotFoundException("No Record found!");
         }
         return ((double) nonInfectedCount / totalCount) * 100;

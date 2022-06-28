@@ -1,28 +1,21 @@
-package com.survive.robotapocalypse.model;
+package com.survive.robotapocalypse.facade.dto;
 
-import javax.persistence.Id;
-import javax.persistence.Entity;
-import javax.persistence.IdClass;
-import javax.persistence.Column;
+import com.survive.robotapocalypse.model.Robot;
+import com.survive.robotapocalypse.model.RobotCategory;
+
 import java.time.LocalDateTime;
 
-@Entity
-@IdClass(RobotCompositeKey.class)
-public class Robot {
+public class RobotDTO {
 
-    @Id
-    @Column(name = "model")
     private String model;
 
-    @Id
-    @Column(name = "serialNumber")
     private String serialNumber;
 
-    @Column(name = "manufacturedDate")
     private LocalDateTime manufacturedDate;
 
-    @Column(name = "category")
     private RobotCategory category;
+    
+
     public String getModel() {
         return model;
     }
@@ -53,5 +46,23 @@ public class Robot {
 
     public void setCategory(RobotCategory category) {
         this.category = category;
+    }
+
+    public static Robot toRobot(RobotDTO dto) {
+        Robot robot = new Robot();
+        robot.setModel(dto.getModel());
+        robot.setCategory(dto.getCategory());
+        robot.setManufacturedDate(dto.getManufacturedDate());
+        robot.setSerialNumber(dto.getSerialNumber());
+        return robot;
+    }
+
+    public static RobotDTO fromRobot(Robot robot) {
+        RobotDTO robotDTO = new RobotDTO();
+        robotDTO.setModel(robot.getModel());
+        robotDTO.setCategory(robot.getCategory());
+        robotDTO.setManufacturedDate(robot.getManufacturedDate());
+        robotDTO.setSerialNumber(robot.getSerialNumber());
+        return robotDTO;
     }
 }

@@ -22,3 +22,9 @@ java -jar robot-apocalypse-0.0.1-SNAPSHOT.jar
 Robot Apocalypse Service Swagger for API documentation
 -------------------------------------------------------
 http://localhost:8080/
+
+
+Docker commands to build and run the Project
+--------------------------------------------------
+docker build -t="robot-apocalypse" .
+docker run -p 8080:8080 -it --rm robot-apocalypse 
